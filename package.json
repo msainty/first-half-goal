@@ -11,7 +11,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "react-scripts build && aws s3 sync build/ s3://first-half-goals --delete"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0",

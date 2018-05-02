@@ -35,5 +35,8 @@ jobs:
         
       # run tests!
       - run: yarn test
-
-
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync jekyll/_site/docs s3://first-half-goals.s3-website-eu-west-1.amazonaws.com/ --delete
