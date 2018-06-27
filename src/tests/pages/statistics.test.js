@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Intro from '@components/Intro';
+import Statistics from '@pages/Statistics';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Intro />, div);
+  ReactDOM.render(<Statistics />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

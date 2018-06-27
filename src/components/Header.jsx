@@ -1,22 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
+import colors from '@config/colors';
 
 const HeaderContainer = styled.header`
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  background: ${colors.headerBackground};
+  height: 30px;
   color: white;
+  font-size: 16px;
 `;
 
-const HeaderText = styled.h1`
-  font-size: 1.5em;
+const MenuItemContainer = styled.div`
+  display: flex;
+`;
+
+const MenuItem = styled.div`
+  padding: 0px 20px 0px 20px;
+  vertical-align: middle;
+  line-height: 30px
 `;
 
 const Header = () => (
   <HeaderContainer>
-    <HeaderText>
+    <MenuItem>
       Welcome to First Half Goals
-    </HeaderText>
+    </MenuItem>
+    <MenuItemContainer>
+      <MenuItem>
+        Statistics
+      </MenuItem>
+      <MenuItem>
+        Strategies
+      </MenuItem>
+    </MenuItemContainer>
+    <MenuItemContainer>
+      <MenuItem>
+        Login
+      </MenuItem>
+    </MenuItemContainer>
   </HeaderContainer>
 );
 

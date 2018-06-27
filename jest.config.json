@@ -29,7 +29,10 @@
         "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
     ],
     "moduleNameMapper": {
-        "^react-native$": "react-native-web"
+        "^react-native$": "react-native-web",
+        "^@components(.*)$": "<rootDir>/src/components$1",
+        "^@pages(.*)$": "<rootDir>/src/pages$1",
+        "^@config(.*)$": "<rootDir>/src/config$1"
     },
     "moduleFileExtensions": [
         "web.js",
