@@ -18,9 +18,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-source-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - v1-source-
       - run: yarn install
       - save_cache:
           paths:
@@ -42,6 +42,11 @@ jobs:
           at: ~/repo
       - restore_cache:
           keys:
+          - v1-source-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-source-
+      - restore_cache:
+          keys:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
@@ -50,7 +55,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync dist/ s3://first-half-goals --delete
+          command: aws s3 sync repo/ s3://first-half-goals --delete
 workflows:
   version: 2
   build-deploy:
