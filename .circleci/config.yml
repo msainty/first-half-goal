@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       # Download and cache dependencies
-      - restore_cache:
+      - save_cache:
           keys:
           - v1-source-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
