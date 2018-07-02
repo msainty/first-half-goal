@@ -14,18 +14,13 @@ jobs:
       # - image: circleci/mongo:3.4.4
     working_directory: ~/repo
     steps:
-      - restore_cache:
-          keys:
-          - v1-source-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-source-
       - checkout
       # Download and cache dependencies
       - save_cache:
           key: v1-source-{{ checksum "package.json" }}
           paths:
             - "~/repo"
-      - run: yarn install
+      - run: yarn build
       - save_cache:
           paths:
             - node_modules
@@ -59,7 +54,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync repo/ s3://first-half-goals --delete
+          command: aws s3 sync ~repo/ s3://first-half-goals --delete
 workflows:
   version: 2
   build-deploy:
