@@ -2,31 +2,59 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.9.4
 version: 2
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.9.4
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-    working_directory: ~/repo
+  checkout_code:
+    <<: *defaults
     steps:
+      - restore_cache:
+          keys:
+            - source-{{ .Branch }}-{{ .Revision }}
+            - source-{{ .Branch }}-
+            - source-
       - checkout
-      # Download and cache dependencies
       - save_cache:
-          key: v1-source-{{ checksum "package.json" }}
+          key: source-{{ .Branch }}-{{ .Revision }}
           paths:
             - "~/repo"
-      - run: yarn build
+  install:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "Yarn install"
+          command: yarn install
       - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      # run tests!
-      - run: yarn test
+  test:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "Test"
+          command: yarn test
+build:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "Build app"
+          command: yarn build
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -59,10 +87,20 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - checkout_code
+      - install:
+          requires:
+            - checkout_code
+      - test:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
       - deploy:
           requires:
+            - test
             - build
-          filters:
-            branches:
-              only: master
+    filters:
+      branches:
+        only: master
