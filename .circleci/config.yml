@@ -45,51 +45,10 @@ jobs:
       - run:
           name: "Test"
           command: yarn test
-build:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: source-{{ .Branch }}-{{ .Revision }}
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: "Build app"
-          command: yarn build
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - dist
-            - package.json
-  deploy:
-    <<: *defaults
-    environment:
-      - STAGING_BUCKET: YOUR_STAGING_BUCKET_NAME
-      - PRODUCTION_BUCKET: YOUR_PRODUCTION_BUCKET_NAME
-      - STAGING_DISTRIBUTION_ID: YOUR_STAGING_DISTRIBUTION_ID
-      - PRODUCTION_DISTRIBUTION_ID: YOUR_PRODUCTION_DISTRIBUTION_ID
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - run: sudo apt-get update && sudo apt-get install -y python-dev
-      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
-      - run: sudo python get-pip.py
-      - run: sudo pip install awscli --upgrade
-      - run: aws --version
-      - run: aws s3 ls
-      - run: 
-          name: "Deploy to S3"
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync dist/ s3://${PRODUCTION_BUCKET} --delete
-              aws cloudfront create-invalidation --distribution-id "${PRODUCTION_DISTRIBUTION_ID}" --paths /index.html
-            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              aws s3 sync dist/ s3://${STAGING_BUCKET} --delete
-              aws cloudfront create-invalidation --distribution-id "${STAGING_DISTREBUTION_ID}" --paths /index.html
-            fi
 
 workflows:
   version: 2
-  build_and_test:
+  build-deploy:
     jobs:
       - checkout_code
       - install:
@@ -98,10 +57,6 @@ workflows:
       - test:
           requires:
             - install
-      - build:
-          requires:
-            - install
-      - deploy:
-          requires:
-            - test
-            - build
+    filters:
+      branches:
+        only: master
