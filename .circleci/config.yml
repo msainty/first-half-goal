@@ -70,12 +70,22 @@ build:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync ~repo/ s3://first-half-goals --delete
+      - run: sudo apt-get update && sudo apt-get install -y python-dev
+      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
+      - run: sudo python get-pip.py
+      - run: sudo pip install awscli --upgrade
+      - run: aws --version
+      - run: aws s3 ls
+      - run: 
+          name: "Deploy to S3"
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              aws s3 sync dist/ s3://${PRODUCTION_BUCKET} --delete
+              aws cloudfront create-invalidation --distribution-id "${PRODUCTION_DISTRIBUTION_ID}" --paths /index.html
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              aws s3 sync dist/ s3://${STAGING_BUCKET} --delete
+              aws cloudfront create-invalidation --distribution-id "${STAGING_DISTREBUTION_ID}" --paths /index.html
+            fi
 
 workflows:
   version: 2
