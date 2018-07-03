@@ -60,7 +60,23 @@ build:
           paths:
             - dist
             - package.json
-  
+  deploy:
+    <<: *defaults
+    environment:
+      - STAGING_BUCKET: YOUR_STAGING_BUCKET_NAME
+      - PRODUCTION_BUCKET: YOUR_PRODUCTION_BUCKET_NAME
+      - STAGING_DISTRIBUTION_ID: YOUR_STAGING_DISTRIBUTION_ID
+      - PRODUCTION_DISTRIBUTION_ID: YOUR_PRODUCTION_DISTRIBUTION_ID
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 sync ~repo/ s3://first-half-goals --delete
+
 workflows:
   version: 2
   build-deploy:
@@ -75,6 +91,10 @@ workflows:
       - build:
           requires:
             - install
+      - deploy:
+          requires:
+            - test
+            - build
     filters:
       branches:
         only: master
