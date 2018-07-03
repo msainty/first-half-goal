@@ -35,16 +35,6 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-  test:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: source-{{ .Branch }}-{{ .Revision }}
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: "Test"
-          command: yarn test
 
 workflows:
   version: 2
@@ -54,9 +44,7 @@ workflows:
       - install:
           requires:
             - checkout_code
-      - test:
-          requires:
-            - install
+
     filters:
       branches:
         only: master
