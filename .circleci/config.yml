@@ -53,7 +53,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: "Build app"
+          name: "Build Application"
           command: yarn build
   deploy:
     docker:
