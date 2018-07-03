@@ -79,7 +79,7 @@ build:
 
 workflows:
   version: 2
-  build-deploy:
+  build_and_test:
     jobs:
       - checkout_code
       - install:
@@ -95,6 +95,3 @@ workflows:
           requires:
             - test
             - build
-    filters:
-      branches:
-        only: master
