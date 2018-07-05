@@ -44,7 +44,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom --coverage --config=jest.config.json",
+    "lint": "node_modules/eslint/bin/eslint.js .",
+    "test:unit": "node scripts/test.js --env=jsdom --coverage --config=jest.config.json",
+    "test": "yarn lint && yarn flow && yarn test:unit",
     "deploy": "node scripts/build.js && aws s3 sync build/ s3://first-half-goals --delete"
   },
   "devDependencies": {
