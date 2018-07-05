@@ -55,24 +55,18 @@ jobs:
       - run:
           name: "Build app"
           command: yarn build
-      -save-cache:
-          key: build-cache-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ./
           paths:
-            - build
+              - build
   deploy:
     docker:
       - image: circleci/python:2.7
     working_directory: ~/repo
     steps:
-      - restore_cache:
-          keys:
-          - source-{{ .Branch }}-{{ .Revision }}
-      - restore_cache:
-          keys:
-          - dependency-cache-{{ checksum "package.json" }}
-      - restore_cache:
-          keys:
-          - build-cache-{{ checksum "package.json" }}
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: ./
       - run:
           name: Install awscli
           command: sudo pip install awscli
