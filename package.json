@@ -5,8 +5,8 @@
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
-    "babel-loader": "7.1.2",
     "babel-jest": "23.0.1",
+    "babel-loader": "7.1.2",
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -48,12 +48,10 @@
     "deploy": "node scripts/build.js && aws s3 sync build/ s3://first-half-goals --delete"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^17.0.0"
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "flow-bin": "^0.75.0"
   },
   "eslintConfig": {
     "extends": "react-app"
