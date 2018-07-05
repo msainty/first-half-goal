@@ -7,5 +7,8 @@
 [lints]
 
 [options]
+    module.name_mapper='@components' -> '<PROJECT_ROOT>/src/components'
+    module.name_mapper='@pages' -> '<PROJECT_ROOT>/src/pages'
+    module.name_mapper='@config' -> '<PROJECT_ROOT>/src/config'
 
 [strict]
