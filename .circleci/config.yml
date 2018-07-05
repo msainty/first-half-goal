@@ -72,7 +72,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync . s3://first-half-goals --delete
+          command: aws s3 sync build s3://first-half-goals --delete
 workflows:
   version: 2
   build-deploy:
