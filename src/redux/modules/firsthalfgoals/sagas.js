@@ -7,15 +7,12 @@ import * as actionTypes from './actionTypes';
 
 export function* fetchFixtureSaga(): Saga<void> {
   try {
-    const resp = yield call(
-      fetch,
-      'http://localhost:5001/',
-    );
+    const resp = yield call(fetch, 'http://localhost:5001/');
+    const data = yield resp.json();
     if (resp.status === 200) {
-      const fixtures = yield resp.json();
-      yield put(fetchFixtureSuccess(fixtures));
+      yield put(fetchFixtureSuccess(data));
     } else {
-      yield put(fetchFixtureError(resp.message));
+      yield put(fetchFixtureError(data.message));
     }
   } catch (error) {
     yield put(fetchFixtureError(error.message));

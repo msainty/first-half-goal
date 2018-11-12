@@ -2,7 +2,7 @@
 import * as actionTypes from './actionTypes';
 import type { State, Action } from './types';
 
-const initialState: State = {
+export const initialState: State = {
   fixtures: [],
 };
 
@@ -11,19 +11,19 @@ const firstHalfGoalsReducer = (state: State = initialState, action: Action): Sta
     case actionTypes.GET.FETCH:
       return {
         ...state,
-        satus: 'processing',
+        status: 'processing',
       };
     case actionTypes.GET.OK:
       return {
         ...state,
         fixtures: action.availableFixtures,
-        satus: 'ok',
+        status: 'ok',
       };
     case actionTypes.GET.ERROR:
       return {
         ...state,
         error: action.error,
-        satus: 'error',
+        status: 'error',
       };
     default:
       return state;

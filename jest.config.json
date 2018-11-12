@@ -1,18 +1,20 @@
 {
     "collectCoverageFrom": [
         "src/**/*.{js,jsx,mjs}",
-        "!src/registerServiceWorker.js"
+        "!src/registerServiceWorker.js",
+        "!src/index.js"
     ],
     "coverageThreshold": {
         "global": {
-          "branches": 100,
-          "functions": 100,
-          "lines": 100,
-          "statements": 100
+          "branches": 80,
+          "functions": 80,
+          "lines": 80,
+          "statements": 80
         }
     },
     "setupFiles": [
-        "<rootDir>/config/polyfills.js"
+        "<rootDir>/config/polyfills.js",
+        "<rootDir>/src/tests/enzyme-setup.js"
     ],
     "testMatch": [
         "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -32,7 +34,8 @@
         "^react-native$": "react-native-web",
         "^@components(.*)$": "<rootDir>/src/components$1",
         "^@pages(.*)$": "<rootDir>/src/pages$1",
-        "^@config(.*)$": "<rootDir>/src/config$1"
+        "^@config(.*)$": "<rootDir>/src/config$1",
+        "^@redux(.*)$": "<rootDir>/src/redux$1"
     },
     "moduleFileExtensions": [
         "web.js",
