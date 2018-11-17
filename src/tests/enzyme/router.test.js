@@ -1,6 +1,6 @@
 // flow
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Route } from 'react-router';
 import FirstHalfGoals from '@pages/FirstHalfGoals';
 import Statistics from '@pages/Statistics';
@@ -16,17 +16,4 @@ it('renders correct routes', () => {
   expect(pathMap['/first-half-goals']).toBe(FirstHalfGoals);
   expect(pathMap['/statistics']).toBe(Statistics);
   expect(pathMap['/']).toBe(RootRedirect);
-});
-
-it('redirects to home route', () => {
-  const wrapper = mount(<Route path="/" component={RootRedirect} />);
-  console.log(wrapper);
-  // const pathMap = wrapper.find(Route).reduce((pathMap, route) => { // eslint-disable-line
-  //   const routeProps = route.props();
-  //   pathMap[routeProps.path] = routeProps.component; // eslint-disable-line
-  //   return pathMap;
-  // }, {});
-  // expect(pathMap['/first-half-goals']).toBe(FirstHalfGoals);
-  // expect(pathMap['/statistics']).toBe(Statistics);
-  // expect(pathMap['/']).toBe(RootRedirect);
 });
