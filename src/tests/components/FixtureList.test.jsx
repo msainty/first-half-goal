@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Statistics from '@pages/Statistics';
-import ini from '@redux/modules/firsthalfgoals/reducers';
+import FixtureList from '@components/FixtureList';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Statistics />, div);
+  ReactDOM.render(<FixtureList />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with fixtures 1`] = `
+<div
+  className="sc-bwzfXH jIEWCi"
+>
+  <p
+    className="sc-bdVaJa jcpqsy"
+  >
+    Home Team
+    Swansea
+  </p>
+</div>
+`;
+
+exports[`renders with no fixtures 1`] = `
+<div
+  className="sc-bwzfXH jIEWCi"
+>
+  No fixtures today
+</div>
+`;
