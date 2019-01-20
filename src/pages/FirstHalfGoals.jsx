@@ -10,6 +10,7 @@ import { getFixtures, getNoFixtures } from '../redux/modules/firsthalfgoals/sele
 
 const PageContainer = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 type Props = {
@@ -32,8 +33,8 @@ class FirstHalfGoals extends Component<Props> {
           && 'No fixtures today'
         }
         {!hasNoFixtures
-        && Array.isArray(fixtures) && fixtures.map(({ uuid, homeTeam }) => (
-          <Fixture key={uuid} homeTeam={homeTeam} />
+        && Array.isArray(fixtures) && fixtures.map(fixture => (
+          <Fixture key={fixture.uuid} fixture={fixture} />
         ))}
       </PageContainer>
     );

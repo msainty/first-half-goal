@@ -2,20 +2,68 @@
 
 exports[`renders with fixtures 1`] = `
 <div
-  className="sc-bwzfXH jIEWCi"
+  className="sc-htpNat dePyzG"
 >
-  <p
-    className="sc-bdVaJa jcpqsy"
+  <div
+    className="sc-bdVaJa bsHmJl"
   >
-    Home Team
-    Swansea
-  </p>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      2019-01-02
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      England
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      PL
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      Manchester United
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      Brighton
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      15
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      0
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      0.66
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      0.55
+    </div>
+    <div
+      className="sc-bwzfXH czactv"
+    >
+      0.85
+    </div>
+  </div>
 </div>
 `;
 
 exports[`renders with no fixtures 1`] = `
 <div
-  className="sc-bwzfXH jIEWCi"
+  className="sc-htpNat dePyzG"
 >
   No fixtures today
 </div>
