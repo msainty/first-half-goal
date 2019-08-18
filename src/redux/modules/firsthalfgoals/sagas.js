@@ -7,7 +7,7 @@ import * as actionTypes from './actionTypes';
 
 export function* fetchFixtureSaga(): Saga<void> {
   try {
-    const resp = yield call(fetch, 'https://voh2jldwd4.execute-api.eu-west-1.amazonaws.com/production');
+    const resp = yield call(fetch, 'https://8gmwhu39ve.execute-api.eu-west-1.amazonaws.com/production/');
     const data = yield resp.json();
     if (resp.status === 200) {
       yield put(fetchFixtureSuccess(data));
