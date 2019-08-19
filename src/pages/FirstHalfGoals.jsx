@@ -29,11 +29,9 @@ class FirstHalfGoals extends Component<Props> {
     const { fixtures, hasNoFixtures } = this.props;
     return (
       <PageContainer>
-        {hasNoFixtures
-          && 'No fixtures today'
-        }
+        {hasNoFixtures && 'No fixtures today'}
         {!hasNoFixtures
-        && Array.isArray(fixtures) && fixtures.map(fixture => (
+        && Array.isArray(fixtures) && fixtures.map((fixture) => (
           <Fixture key={fixture.uuid} fixture={fixture} />
         ))}
       </PageContainer>
