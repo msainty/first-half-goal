@@ -67,12 +67,15 @@
     "build": "node scripts/build.js",
     "lint": "node_modules/eslint/bin/eslint.js .",
     "test:unit": "node scripts/test.js --env=jsdom --coverage --config=jest.config.json",
+    "test:codacy": "yarn test:unit && cat ./coverage/lcov.info | codacy-coverage --username msainty --projectName first-half-goal",
     "test": "yarn lint && yarn flow && yarn test:unit",
+    "test:ci": "yarn lint && yarn flow && yarn test:codacy",
     "deploy": "node scripts/build.js && aws s3 sync build/ s3://first-half-goals --delete"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-flow": "6.23.0",
+    "codacy-coverage": "^3.4.0",
     "eslint-config-airbnb": "18.0.1",
     "flow-bin": "0.105.2",
     "fork-ts-checker-notifier-webpack-plugin": "1.0.2",
