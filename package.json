@@ -52,7 +52,7 @@
     "redux-saga-tester": "1.0.569",
     "redux-thunk": "2.3.0",
     "style-loader": "1.0.0",
-    "styled-components": "3.4.10",
+    "styled-components": "4.4.0",
     "sw-precache-webpack-plugin": "0.11.5",
     "ts-loader": "6.2.0",
     "url-loader": "2.2.0",
